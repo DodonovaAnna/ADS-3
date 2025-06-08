@@ -3,12 +3,18 @@
 #include "alg.h"
 
 uint64_t collatzMaxValue(uint64_t num) {
-   uint64_t max = num;
-    while (num != 1) {
-        num = (num % 2 == 0) ? (num / 2) : (num * 3 + 1);
-        max = std::max(max, num);
+  uint64_t maxi = 0;
+  while (num != 1) {
+      if (num % 2 == 0) {
+        num = num / 2;
+      } else {
+        num = num * 3 + 1;
+      }
+      if (maxi < num) {
+        maxi = num;
+      }
     }
-    return maximum;
+  return maxi;
 }
 
 unsigned int collatzLen(uint64_t num) {
@@ -27,14 +33,14 @@ unsigned int collatzLen(uint64_t num) {
 unsigned int seqCollatz(unsigned int *maxlen,
                         uint64_t lbound,
                         uint64_t rbound) {
-  unsigned int max = 0;
+  unsigned int maximum = 0;
   unsigned int startNum = 0;
   for (uint64_t i = lbound; i < rbound; i++) {
-    if (collatzLen(i) > max) {
-        max = collatzLen(i);
+    if (collatzLen(i) > maxi) {
+        maxi = collatzLen(i);
         startNum = i;
       }
     }
-    *maxlen = max;
+    *maxlen = maxi;
     return startNum;
 }
